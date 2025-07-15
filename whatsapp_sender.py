@@ -1,5 +1,9 @@
 from agents import function_tool
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 @function_tool
 def send_whatsapp_message(number: str, message: str) -> str:
@@ -8,8 +12,8 @@ def send_whatsapp_message(number: str, message: str) -> str:
     Returns a success message if sent successfully, or an error message if the request fails.
     """
 
-    instance_id = "instance132490"
-    token = "dui3bklvs5csrim1"
+    instance_id = os.getenv("INSTANCE_ID")
+    token = os.getenv("API_TOKEN")
 
     url = f"https://api.ultramsg.com/{instance_id}/messages/chat"
     
