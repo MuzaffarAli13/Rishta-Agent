@@ -50,6 +50,8 @@ rishty_agent = Agent(
     tools=[get_user_data_from_sheet, send_whatsapp_message]
 )
 
+st.image("agent.png", width=650)
+
 # Streamlit App
 st.title("📱 Rishty Wali Auntie 🤭")
 
@@ -67,8 +69,16 @@ prompt = st.text_area("📩 Prompt:")
 if "history" not in st.session_state:
    histroy =  st.session_state.history = []
 
-
-
+st.markdown(
+    """
+    <a href="https://forms.gle/Arpz3zRRx7RAXeWW9" target="_blank">
+        <button style='padding: 10px 13px; font-size: 16px; background-color: #f63366; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 12px;'>
+            👵 Add Rishta
+        </button>
+    </a>
+    """,
+    unsafe_allow_html=True
+)
 if st.button("👵 Find Rishta"):
     with st.spinner("📡 Fetching rishta data from database, hold on beta..."):
         st.session_state.history.append({"role": "user", "content": prompt})
@@ -86,7 +96,7 @@ if st.button("👵 Find Rishta"):
                 input=st.session_state.history
             )
         )
-
+    
         prompt = ""
         st.session_state.history.append({"role": "assistant", "content": result.final_output})
 
